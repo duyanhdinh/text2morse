@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <x-svg.app-logo fill-circle="#004aad" fill-dash="#af3939"/>
                     </a>
                 </div>
 
@@ -137,7 +137,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden absolute z-100 bg-white w-full">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden absolute z-10 bg-white w-full">
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
