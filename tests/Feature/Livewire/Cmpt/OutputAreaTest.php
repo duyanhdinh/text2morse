@@ -3,6 +3,9 @@
 use App\Livewire\Cmpt\OutputArea;
 use Livewire\Livewire;
 
+const CHARS_VALID = "The quick brown fox jumps over the lazy dog. 12, 34/567890?";
+const TRUE_ENCODE = '- .... . / --.- ..- .. -.-. -.- / -... .-. --- .-- -. / ..-. --- -..- / .--- ..- -- .--. ... / --- ...- . .-. / - .... . / .-.. .- --.. -.-- / -.. --- --. .-.-.- / .---- ..--- --..-- / ...-- ....- -..-. ..... -.... --... ---.. ----. ----- ..--..';
+
 it('renders successfully', function () {
     Livewire::test(OutputArea::class)
         ->assertStatus(200);
@@ -11,16 +14,16 @@ it('renders successfully', function () {
 it('should encode alphanumeric & space characters to morse successfully', function () {
     Livewire::test(OutputArea::class, [
         'encode' => true,
-        'input' => 'abc12 3',
+        'input' => CHARS_VALID,
     ])
-        ->assertSet('output', '.- -... -.-. .---- ..--- / ...--');
+        ->assertSet('output', TRUE_ENCODE);
 });
 
 
 it('should decode morse code successfully', function () {
     Livewire::test(OutputArea::class, [
         'encode' => false,
-        'input' => '.- -... -.-. .---- ..--- / ...--',
+        'input' => TRUE_ENCODE,
     ])
-        ->assertSet('output', 'abc12 3');
+        ->assertSet('output', strtolower(CHARS_VALID));
 });

@@ -3,14 +3,16 @@
 namespace App\Livewire\Cmpt;
 
 use App\Facades\Morse;
-use App\Services\Morse\MorseEnum;
-use Livewire\Attributes\Js;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class InputArea extends Component
 {
+    const MAX_LENGTH_ENCODE = 2000;
+    const MAX_LENGTH_DECODE = 4000;
+
     #[Url(as: 'text')]
     public string $input = '';
 
@@ -34,16 +36,6 @@ class InputArea extends Component
         $this->encode = $data;
     }
 
-//    #[Js]
-//    public function jsValidCharacter(): string
-//    {
-//        return <<<'JS'
-//            if ($wire.encode) {
-//                await $wire.validCharacter();
-//            }
-//        JS;
-//    }
-
     public function validCharacter(): void
     {
         if ($this->encode) {
@@ -57,11 +49,22 @@ class InputArea extends Component
 
     private function validCharacterEncode(): void
     {
-        $this->input = Morse::validEncode($this->input);
+        $this->input = substr(Morse::validEncode($this->input),0, self::MAX_LENGTH_ENCODE);
     }
 
     private function validCharacterDecode(): void
     {
-        $this->input = Morse::validDecode($this->input);
+        $this->input = substr(Morse::validDecode($this->input),0, self::MAX_LENGTH_DECODE);
+    }
+
+    #[Computed]
+    public function countedLength(): string
+    {
+        $length = strlen($this->input);
+        if ($this->encode) {
+            return $length . '/' . self::MAX_LENGTH_ENCODE;
+        }
+
+        return $length . '/' . self::MAX_LENGTH_DECODE;
     }
 }

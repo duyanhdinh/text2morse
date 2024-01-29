@@ -9,7 +9,7 @@
         </div>
         <div class="flex-1 text-center" x-text="!$wire.encode ? 'Text' : 'Morse'"></div>
     </div>
-    <div class="w-full h-[240px] flex space-x-[12px]">
+    <div class="w-full h-[80vh] flex space-x-[12px] leading-[28px]">
         <div class="flex-1 h-full">
             <livewire:cmpt.input-area
             />

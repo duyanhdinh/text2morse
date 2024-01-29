@@ -39,14 +39,14 @@ class MorseService
         return $this->decode($this->validDecode($s));
     }
 
-    public function validEncode($s): array|string|null
+    public function validEncode($s): string
     {
-        return preg_replace("/[^a-zA-Z0-9 ]+/", "", $s);
+        return strval(preg_replace("/[^a-zA-Z0-9 .,?\/\r\n]+/", "", $s));
     }
 
-    public function validDecode($s): array|string|null
+    public function validDecode($s): string
     {
-        return preg_replace("/[^\-. \/]+/", "", $s);
+        return strval(preg_replace("/[^\-. \/]+/", "", $s));
     }
 
 }

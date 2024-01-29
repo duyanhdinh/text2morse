@@ -42,17 +42,39 @@ enum MorseEnum: string
     case _9 = "----.";
     case SPACE = "/";
 
+    case DOT = ".-.-.-";
+    case COMMA = "--..--";
+
+    case Q_MARK  = "..--..";
+    case SLASH = "-..-.";
+
     public static function fromChar(string $name)
     {
-        if ($name === ' ') {
-            return constant("self::SPACE");
+        switch ($name) {
+            case ' ':
+            case "\r\n":
+            case "\r":
+            case "\n":
+                return constant("self::SPACE");
+            case '.':
+                return constant("self::DOT");
+            case ',':
+                return constant("self::COMMA");
+            case '?':
+                return constant("self::Q_MARK");
+            case '/':
+                return constant("self::SLASH");
         }
 
         if (ctype_digit($name)) {
             return constant("self::_$name");
         }
 
-        return constant("self::$name");
+        if (ctype_alpha($name)) {
+            return constant("self::$name");
+        }
+
+        return '';
     }
 
     public static function values(): array
@@ -60,12 +82,17 @@ enum MorseEnum: string
         return array_column(self::cases(), 'value');
     }
 
-    public static function getCharName($value)
+    public static function getCharName($value): array|string
     {
         $name = self::from($value)->name;
 
-        if ($name === 'SPACE') return ' ';
-
-        return str_replace('_', '', $name);
+        return match ($name) {
+            'SPACE' => ' ',
+            'DOT' => '.',
+            'COMMA' => ',',
+            'Q_MARK' => '?',
+            'SLASH' => '/',
+            default => str_replace('_', '', $name),
+        };
     }
 }

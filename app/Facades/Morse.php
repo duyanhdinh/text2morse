@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static string encodeSecure(string $s)
  * @method static string decode(string $s)
  * @method static string decodeSecure(string $s)
- * @method static array|string|null validEncode(string $s)
- * @method static array|string|null validDecode(string $s)
+ * @method static string validEncode(string $s)
+ * @method static string validDecode(string $s)
  *
  * @see MorseService
  */

@@ -49,5 +49,4 @@ class OutputArea extends Component
     {
         return $this->input ? Morse::decodeSecure($this->input) : '';
     }
-
 }
