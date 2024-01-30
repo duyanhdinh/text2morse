@@ -1,7 +1,7 @@
 ## Morse Code Encode & Decode
 
 ### Demo
-![demo gif](https://github.com/duyanhdinh/text2morse/tree/master/public/demo.gif)
+<img src="https://media.giphy.com/media/YWdEYd3oSpyQ6DuvxE/giphy.gif" width="480" height="250" alt="https://github.com/duyanhdinh/text2morse/blob/master/public/demo.gif" />
 
 ### Install
 
