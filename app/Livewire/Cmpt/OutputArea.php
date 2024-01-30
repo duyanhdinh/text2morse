@@ -4,6 +4,7 @@ namespace App\Livewire\Cmpt;
 
 use App\Facades\Morse;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Js;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -48,5 +49,14 @@ class OutputArea extends Component
     private function decodeOutput(): string
     {
         return $this->input ? Morse::decodeSecure($this->input) : '';
+    }
+
+    #[Js]
+    public function copyToClipboard(): string
+    {
+        return <<<'Js'
+            navigator.clipboard.writeText($refs.output.value);
+            $dispatch('flms-copy-success');
+        Js;
     }
 }
